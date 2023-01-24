@@ -1,6 +1,12 @@
-// TODO: write your code here
-import sum from './basic';
+import GameSavingLoader from './GameSavingLoader';
+import GameSaving from './GameSaving';
 
-console.log('worked');
-
-console.log(sum([1, 2]));
+(async (data) => {
+  try {
+    const loadedGame = GameSavingLoader.load(data);
+    const savedGame = new GameSaving(await loadedGame);
+    return savedGame;
+  } catch (error) {
+    throw new Error(error);
+  }
+})();
